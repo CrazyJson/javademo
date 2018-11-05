@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.config.GrilProperties;
 import com.example.demo.contract.IOrderService;
 import com.example.demo.model.Student;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +22,15 @@ public class helloController {
     private IOrderService orderService;
 
     @Autowired
+    private GrilProperties grilProperties;
+
+    @Autowired
     private List<IOrderService> orderServiceList;
 
     @ApiOperation(value="获取区域详细信息", notes="根据url的id来获取区域详细信息")
     @RequestMapping(value = "hello",method = RequestMethod.GET)
-    public String pp(){
+    public String pp(@RequestParam("id") String id){
+
         String mt = orderService.sayName();
         for(IOrderService os : orderServiceList){
             System.out.println(os.sayName());
@@ -51,7 +54,13 @@ public class helloController {
         Class<Student> c0= Student.class;
 
 
+        System.out.println("xxxx"+id+grilProperties.getCupSize());
         return String.join(",",c);
+    }
+
+    @GetMapping(value = "list")
+    public String xx(){
+        return "abc";
     }
 }
 

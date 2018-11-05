@@ -1,0 +1,12 @@
+server:
+  port: 8082
+spring:
+  profiles:
+    active: prod
+context:
+  listener:
+    classes: com.example.demo.listener.ApplicationEventListener
+gril:
+  cupSize: B
+  age: 12
+  content: "cupSize:${cupSize} age:${age}"
